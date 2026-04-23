@@ -2,13 +2,13 @@
 
 ContentForge is an autonomous, multi-agent AI pipeline designed to scale high-quality SEO content generation while strictly enforcing enterprise compliance and monetization constraints (such as Google Ads policies).
 
-Built entirely with a **LangGraph state machine** and powered by **Google Gemini** models, ContentForge moves beyond single-purpose AI wrappers to showcase true, deterministic agentic orchestration. 
+Built entirely with a **LangGraph state workflow** and powered by **Google Gemini** models, ContentForge moves beyond single-purpose AI wrappers to showcase true, deterministic agentic orchestration. 
 
 ![ContentForge Execution Dashboard](./dashboard.png)
 
 ## System Architecture
 
-The core of ContentForge is a 5-node LangGraph state machine. Each node represents a distinct AI agent with a specific role. 
+The core of ContentForge is a 5-node LangGraph state workflow. Each node represents a distinct AI agent with a specific role. 
 
 Below is the deterministic flowchart of the pipeline. Notice how the **Decision Gates** (Validator and Reviewer) act as automated AI Evals (LLM-as-a-Judge) to route or reject content:
 
@@ -16,7 +16,7 @@ Below is the deterministic flowchart of the pipeline. Notice how the **Decision 
 graph TD
     A[Raw Keyword Batch] --> B[Scorer Agent]
     
-    subgraph Multi-Agent State Machine
+    subgraph Multi-Agent State Workflow
         B -->|If Viable| C[Planner Agent]
         B -.->|If Rejected| Z[Drop Keyword]
         
