@@ -4,7 +4,7 @@ ContentForge is an autonomous, multi-agent AI pipeline designed to scale high-qu
 
 Built entirely with a **LangGraph state machine** and powered by **Google Gemini** models, ContentForge moves beyond single-purpose AI wrappers to showcase true, deterministic agentic orchestration. 
 
-![ContentForge Workflow](./frontend/src/assets/react.svg)
+![ContentForge Execution Dashboard](./dashboard.png)
 
 ## System Architecture
 
