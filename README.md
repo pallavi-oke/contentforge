@@ -8,7 +8,40 @@ Built entirely with a **LangGraph state machine** and powered by **Google Gemini
 
 ## System Architecture
 
-The core of ContentForge is a 5-node LangGraph state machine. Each node represents a distinct AI agent with a specific role:
+The core of ContentForge is a 5-node LangGraph state machine. Each node represents a distinct AI agent with a specific role. 
+
+Below is the deterministic flowchart of the pipeline. Notice how the **Decision Gates** (Validator and Reviewer) act as automated AI Evals (LLM-as-a-Judge) to route or reject content:
+
+```mermaid
+graph TD
+    A[Raw Keyword Batch] --> B[Scorer Agent]
+    
+    subgraph Multi-Agent State Machine
+        B -->|If Viable| C[Planner Agent]
+        B -.->|If Rejected| Z[Drop Keyword]
+        
+        C -->|3 Outlines| D{Validator AI Eval}
+        D -.->|Fail| Z
+        D -->|Pass| E[Generator Agent]
+        
+        subgraph Local RAG
+            db[(ChromaDB: Policy Rules)] -.-> E
+        end
+        
+        E -->|Draft Article| F{Reviewer AI Eval}
+    end
+    
+    F -->|Pass| G[CMS / Master Feed]
+    F -.->|Fail| H[Failure Dashboard]
+    
+    %% Styling the nodes for visual clarity
+    style B fill:#3b82f6,stroke:#1e40af,color:#fff
+    style C fill:#3b82f6,stroke:#1e40af,color:#fff
+    style D fill:#8b5cf6,stroke:#5b21b6,color:#fff,shape:diamond
+    style E fill:#3b82f6,stroke:#1e40af,color:#fff
+    style F fill:#8b5cf6,stroke:#5b21b6,color:#fff,shape:diamond
+    style db fill:#10b981,stroke:#047857,color:#fff
+```
 
 1. 🎯 **Scorer Agent:** Evaluates raw keywords for commercial viability and search intent. Rejects low-value keywords immediately to save compute.
 2. 🗺️ **Planner Agent:** Generates 3 distinct, high-quality SEO content outlines (angles) for approved keywords.
