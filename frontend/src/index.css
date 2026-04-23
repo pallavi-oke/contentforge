@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-slate-900 text-slate-100 antialiased font-sans;
+    background-image: radial-gradient(circle at 50% -20%, #1e1b4b, #0f172a 70%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl;
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400;
+  }
+}
