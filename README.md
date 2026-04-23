@@ -109,4 +109,4 @@ While this repository serves as a pilot, scaling to thousands of articles requir
 * **Resilience:** Wrap the LangGraph execution layer in **Temporal.io** or AWS SQS to handle async queueing and rate-limiting gracefully.
 
 ---
-*Built with ❤️ alongside AntiGravity (Google DeepMind).*
+*Built with ❤️ alongside AntiGravity (powered by Gemini 3.1 Pro).*
